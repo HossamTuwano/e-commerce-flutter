@@ -57,6 +57,7 @@ class _SingleProductState extends State<SingleProduct> {
                       )),
                   GestureDetector(
                     onTap: () {
+                      productsProvider.selectedProduct = getProducts[index];
                       Navigator.of(context).pushNamed("/product_details");
                     },
                     child: Stack(
@@ -118,7 +119,15 @@ class _SingleProductState extends State<SingleProduct> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(1.0),
-                    child: Row(children: const [Likes(), Comments()]),
+                    child: Row(children: [
+                      Likes(
+                          numberOfLikes: getProducts[index].numberOfLikes,
+                          isLiked: getProducts[index].isLiked,
+                          like: () {
+                            productsProvider.isLiked(index);
+                          }),
+                      Comments()
+                    ]),
                   )
                 ],
               ),

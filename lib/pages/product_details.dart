@@ -18,7 +18,10 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
-    ProductProvider selectedProduct = Provider.of<ProductProvider>(context);
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    int index =
+        productProvider.products.indexOf((productProvider.selectedProduct!));
+    print(index);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -32,7 +35,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Image(
                       image: AssetImage("assets/icons/heartitem.png"),
                     ),
@@ -47,7 +50,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   height: 180,
                   width: 200,
                   child: Image(
-                      image: AssetImage(selectedProduct.products[0].image)),
+                      image:
+                          AssetImage(productProvider.selectedProduct!.image)),
                 ),
               ],
             ),
@@ -74,16 +78,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                       left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
-                          "Samsung A70 2020",
+                          productProvider.selectedProduct!.name.toString(),
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(74, 74, 74, 1)),
                         ),
                         Text(
-                          "\$949.00",
+                          productProvider.selectedProduct!.price.toString(),
                           style: TextStyle(
                               fontSize: 20,
                               color: Color.fromARGB(110, 112, 120, 1)),
@@ -97,7 +101,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                     color: AppColors.COLOR_SECONDARY),
               ]),
             ),
-            Row(children: const [Likes(), Comments()]),
+            Row(children: [
+              Likes(
+                  numberOfLikes: productProvider.selectedProduct!.numberOfLikes,
+                  isLiked: productProvider.selectedProduct!.isLiked,
+                  like: () {
+                    productProvider.isLiked(index);
+                  }),
+              Comments()
+            ]),
             const CartButton(),
             const SizedBox(height: 15.0),
             const PeopleLiked(),

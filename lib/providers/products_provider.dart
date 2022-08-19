@@ -6,6 +6,15 @@ class ProductProvider with ChangeNotifier {
 
   List<Products> cart = [];
 
+  Products? _selectedProduct;
+
+  Products? get selectedProduct => _selectedProduct;
+
+  set selectedProduct(Products? product) {
+    _selectedProduct = product;
+    notifyListeners();
+  }
+
   List<Products> products = [
     Products(
       id: 1,
@@ -15,7 +24,7 @@ class ProductProvider with ChangeNotifier {
       isLiked: false,
       isCart: false,
       numberOfComments: 123,
-      numberOfLikes: 120,
+      numberOfLikes: 0,
     ),
     Products(
       id: 2,
@@ -24,8 +33,8 @@ class ProductProvider with ChangeNotifier {
       image: "assets/images/product-images/image-hdd.webp",
       isLiked: false,
       isCart: false,
-      numberOfComments: 123,
-      numberOfLikes: 120,
+      numberOfComments: 12,
+      numberOfLikes: 1,
     ),
     Products(
       id: 3,
@@ -35,7 +44,7 @@ class ProductProvider with ChangeNotifier {
       isLiked: false,
       isCart: false,
       numberOfComments: 123,
-      numberOfLikes: 120,
+      numberOfLikes: 2,
     ),
     Products(
       id: 4,
@@ -45,7 +54,7 @@ class ProductProvider with ChangeNotifier {
       isLiked: false,
       isCart: false,
       numberOfComments: 123,
-      numberOfLikes: 120,
+      numberOfLikes: 3,
     ),
     Products(
       id: 5,
@@ -55,7 +64,7 @@ class ProductProvider with ChangeNotifier {
       isLiked: false,
       isCart: false,
       numberOfComments: 123,
-      numberOfLikes: 120,
+      numberOfLikes: 4,
     ),
   ];
   // notifyListeners();
