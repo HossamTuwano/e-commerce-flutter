@@ -72,6 +72,9 @@ class ProductProvider with ChangeNotifier {
 
   void isLiked(index) {
     products[index].isLiked = !products[index].isLiked;
+    products[index].isLiked
+        ? products[index].numberOfLikes++
+        : products[index].numberOfLikes--;
     notifyListeners();
   }
 
