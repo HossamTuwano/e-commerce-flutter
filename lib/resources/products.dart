@@ -5,6 +5,7 @@ class Products {
   String image;
   bool isLiked;
   bool isCart;
+  bool isTrending;
   int numberOfLikes;
   int numberOfComments;
 
@@ -15,6 +16,7 @@ class Products {
       required this.image,
       required this.isLiked,
       required this.isCart,
+      required this.isTrending,
       required this.numberOfLikes,
       required this.numberOfComments});
 
