@@ -38,7 +38,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 50),
+              margin: const EdgeInsets.only(top: 25),
               width: 350,
               child: Form(
                   child: Column(
@@ -101,7 +101,30 @@ class _LoginState extends State<Login> {
                           },
                           buttonText: 'Login',
                           btnColor: Colors.red,
-                          isCart: false))
+                          isCart: false)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Don\'t have account?',
+                          style: TextStyle(color: Colors.white, fontSize: 15.0),
+                        ),
+                        const SizedBox(width: 5.0),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/register');
+                          },
+                          child: const Text(
+                            'create new account',
+                            style: TextStyle(color: Colors.red, fontSize: 15.0),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               )),
             )

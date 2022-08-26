@@ -2,7 +2,7 @@ import 'package:e_commerce_qlicue/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'pages/product_details.dart';
 import 'pages/login.dart';
-import 'package:provider/provider.dart';
+import 'pages/register.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -15,7 +15,8 @@ class App extends StatelessWidget {
       home: const Login(),
       routes: {
         "/product_details": (context) => const ProductDetails(),
-        "/home": (context) => const Home()
+        "/home": (context) => const Home(),
+        "/register": (context) => const Register()
       },
     );
   }
