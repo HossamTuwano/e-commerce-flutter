@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/button.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -9,10 +11,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(62, 62, 62, 1),
+      backgroundColor: const Color.fromRGBO(62, 62, 62, 1),
       body: SafeArea(
         child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -25,15 +30,15 @@ class _LoginState extends State<Login> {
                   letterSpacing: 3.3,
                   fontWeight: FontWeight.bold),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
                 'login to continue',
                 style: TextStyle(color: Color.fromARGB(255, 179, 172, 172)),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 50),
+              margin: const EdgeInsets.only(top: 50),
               width: 350,
               child: Form(
                   child: Column(
@@ -41,6 +46,8 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      controller: _emailController,
+                      textInputAction: TextInputAction.next,
                       style: const TextStyle(
                           color: Color.fromARGB(255, 179, 172, 172)),
                       decoration: const InputDecoration(
@@ -54,6 +61,13 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                        onEditingComplete: () {
+                          userProvider.login(
+                              email: _emailController.text,
+                              password: _emailController.text);
+                        },
+                        controller: _passwordController,
+                        textInputAction: TextInputAction.send,
                         style: const TextStyle(
                             color: Color.fromARGB(255, 179, 172, 172)),
                         decoration: const InputDecoration(
@@ -70,7 +84,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: const [
                         Text(
-                          'forgot passwrod ?',
+                          'forgot password ?',
                           style: TextStyle(color: Colors.red),
                         )
                       ],
@@ -79,7 +93,12 @@ class _LoginState extends State<Login> {
                   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CartButton(
-                          addCart: () {},
+                          addCart: () {
+                            Navigator.of(context).pushNamed('/home');
+                            userProvider.login(
+                                email: _emailController.text,
+                                password: _passwordController.text);
+                          },
                           buttonText: 'Login',
                           btnColor: Colors.red,
                           isCart: false))

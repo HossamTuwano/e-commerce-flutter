@@ -6,7 +6,6 @@ import '../widgets/button.dart';
 import "../widgets/people_liked.dart";
 import "../widgets/reviews.dart";
 import 'package:provider/provider.dart';
-import '../widgets/my_cart.dart';
 import '../providers/products_provider.dart';
 
 class ProductDetails extends StatefulWidget {

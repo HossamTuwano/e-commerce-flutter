@@ -2,6 +2,7 @@ import 'package:e_commerce_qlicue/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'pages/product_details.dart';
 import 'pages/login.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -12,7 +13,10 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "e-commerce",
       home: const Login(),
-      routes: {"/product_details": (context) => const ProductDetails()},
+      routes: {
+        "/product_details": (context) => const ProductDetails(),
+        "/home": (context) => const Home()
+      },
     );
   }
 }

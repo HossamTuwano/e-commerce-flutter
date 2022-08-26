@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import '../providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
     return Column(
       children: [
         Container(
@@ -35,9 +38,9 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
-                  const Text(
-                    'Tim Cook',
-                    style: TextStyle(
+                  Text(
+                    userProvider.user.email,
+                    style: const TextStyle(
                         color: Color(0xff242424),
                         fontWeight: FontWeight.w900,
                         fontSize: 25,
