@@ -21,6 +21,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     ProductProvider productProvider = Provider.of<ProductProvider>(context);
     int index =
         productProvider.products.indexOf((productProvider.selectedProduct!));
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -162,11 +163,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                     children: [
                       Image.asset('assets/icons/downswipearrow.png'),
                       ListTile(
-                        leading: Image.asset(productProvider.cart[index].image),
+                        leading: Image.asset(productProvider
+                            .cart[productProvider.cart.length - 1].image),
                         trailing: Image.asset('assets/icons/viewcart_btn.png'),
-                        title: Text(productProvider.selectedProduct!.name),
-                        subtitle:
-                            Text('\$${productProvider.selectedProduct!.price}'),
+                        title: Text(productProvider
+                            .cart[productProvider.cart.length - 1].name),
+                        subtitle: Text(
+                            '\$${productProvider.cart[productProvider.cart.length - 1].price}'),
                       ),
                     ],
                   ),
