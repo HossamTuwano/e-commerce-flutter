@@ -11,7 +11,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final _usernameController = TextEditingController();
+  final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -50,12 +50,12 @@ class _RegisterState extends State<Register> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: _usernameController,
+                        controller: _nameController,
                         textInputAction: TextInputAction.next,
                         style: const TextStyle(
                             color: Color.fromARGB(255, 179, 172, 172)),
                         decoration: const InputDecoration(
-                            hintText: 'username',
+                            hintText: 'name',
                             hintStyle: TextStyle(
                                 letterSpacing: 1.0,
                                 color: Color.fromARGB(255, 179, 172, 172)),
@@ -136,10 +136,15 @@ class _RegisterState extends State<Register> {
                         padding: const EdgeInsets.all(8.0),
                         child: CartButton(
                             addCart: () {
-                              Navigator.of(context).pushNamed('/home');
-                              userProvider.login(
-                                  email: _emailController.text,
-                                  password: _passwordController.text);
+                              userProvider
+                                  .register(
+                                      name: _nameController.text,
+                                      phone: _phoneController.text,
+                                      email: _emailController.text,
+                                      password: _passwordController.text)
+                                  .then((Map<String, dynamic> response) {
+                                Navigator.of(context).pushNamed('/home');
+                              });
                             },
                             buttonText: 'Create account',
                             btnColor: Colors.red,
